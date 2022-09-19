@@ -13,7 +13,7 @@ Follow the following steps to setup the project on your local system:
 
 1. Clone this repository - `$ git clone https://github.com/garvitchittora/LMS_Backend.git`
 2. Create a python virtual environment - `$ python -m venv lmsenv`
-3. Activate the virtual environment - `$ source lsmenv/bin/activate`
+3. Activate the virtual environment - `$ source lmsenv/bin/activate`
 4. Install required packages - `$ pip install -r requirements.txt`
 5. Done!
 
