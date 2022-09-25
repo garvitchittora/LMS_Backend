@@ -78,3 +78,7 @@ venv.bak/
 
 # OSX specific
 *.DS_Store
+
+# Image files
+media/*
+!media/default.png
