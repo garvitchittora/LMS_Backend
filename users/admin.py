@@ -12,7 +12,22 @@ class UserAdmin(BaseUserAdmin):
         *BaseUserAdmin.fieldsets,
         (
             "Roles",
-            {"fields": ("is_admin", "is_teacher", "is_accountant")}
+            {"fields": ("is_admin", "is_teacher", "is_accountant")},
+        ),
+        (
+            "General Details",
+            {
+                "fields": (
+                    "phone_number", 
+                    "address", 
+                    "city", 
+                    "nationality", 
+                    "social_category", 
+                    "designation", 
+                    "annual_income", 
+                    "image",
+                )
+            },
         )
     )
 
