@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from PIL import Image
 
-from users.utils import authuser_image_path
+from users.utils import GenderChoices, authuser_image_path
 
 
 class User(AbstractUser):
@@ -17,6 +17,12 @@ class User(AbstractUser):
     is_accountant = models.BooleanField(_("accountant"), default=False)
 
     # General details
+    gender = models.CharField(
+        _("gender"),
+        choices=GenderChoices.choices,
+        default=GenderChoices.MALE,
+        max_length=15,
+    )
     phone_number = models.CharField(_("phone number"), blank=True, max_length=16)
     address = models.CharField(_("address"), blank=True, max_length=300)
     city = models.CharField(_("city"), blank=True, max_length=100)

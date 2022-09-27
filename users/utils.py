@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db import models
 
 
 def authuser_image_path(instance: settings.AUTH_USER_MODEL, filename: str) -> str:
@@ -9,3 +10,12 @@ def authuser_image_path(instance: settings.AUTH_USER_MODEL, filename: str) -> st
     """
     extension = filename.split(".")[-1]
     return f"authuser/{instance.username}.{extension}"
+
+
+class GenderChoices(models.TextChoices):
+    """
+    Contains the available choices for the `gender` field.
+    """
+    MALE = "MALE", "Male"
+    FEMALE = "FEMALE", "Female"
+    OTHER = "OTHER", "Other"

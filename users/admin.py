@@ -18,6 +18,7 @@ class UserAdmin(BaseUserAdmin):
             "General Details",
             {
                 "fields": (
+                    "gender",
                     "phone_number", 
                     "address", 
                     "city", 
