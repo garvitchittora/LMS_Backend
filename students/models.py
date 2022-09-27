@@ -3,7 +3,8 @@ from django.utils.translation import gettext_lazy as _
 from PIL import Image
 from users.utils import GenderChoices
 
-from students.utils import guardian_image_path, student_image_path
+from students.utils import (GuardianStudentRelations, guardian_image_path,
+                            student_image_path)
 
 
 class Guardian(models.Model):
@@ -11,6 +12,12 @@ class Guardian(models.Model):
     Stores information of the guardian/parent of a student.
     """
     name = models.CharField(_("name"), max_length=300, blank=True)
+    relation = models.CharField(
+        _("relation"),
+        max_length=20,
+        default=GuardianStudentRelations.RELATIVE,
+        choices=GuardianStudentRelations.choices
+    )
     age = models.PositiveSmallIntegerField(_("age"), default=0)
     gender = models.CharField(
         _("gender"),
@@ -66,6 +73,7 @@ class Student(models.Model):
     image = models.ImageField(
         _("image"), upload_to=student_image_path, default="default.png"
     )
+    guardians = models.ManyToManyField(Guardian, related_name="wards")
     
     def __str__(self) -> str:
         return f"{self.enrollment_id} - {self.name}"

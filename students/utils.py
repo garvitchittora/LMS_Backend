@@ -1,5 +1,6 @@
 import string
 
+from django.db import models
 from django.utils.crypto import get_random_string
 
 
@@ -20,3 +21,14 @@ def student_image_path(instance, filename: str) -> str:
     """
     extension = filename.split(".")[-1]
     return f"student/{instance.enrollment_id}.{extension}"
+
+
+class GuardianStudentRelations(models.TextChoices):
+    """
+    Provides choices for the relationship of a student with a guardian.
+    The guardian can be the student's father, mother, or any other relative.
+    """
+    FATHER = "FATHER", "Father"
+    MOTHER = "MOTHER", "Mother"
+    RELATIVE = "RELATIVE", "Relative"
+    NON_RELATED = "NON RELATED", "Non Related"
