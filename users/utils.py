@@ -1,8 +1,7 @@
-from django.conf import settings
 from django.db import models
 
 
-def authuser_image_path(instance: settings.AUTH_USER_MODEL, filename: str) -> str:
+def authuser_image_path(instance, filename: str) -> str:
     """
     Generate the upload path for the image of an authenticable user.
     Authenticable users include admins, teachers and accountants.
