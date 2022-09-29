@@ -18,4 +18,4 @@ class StudentAdmin(admin.ModelAdmin):
     Configuration for the handling the Student instances in the admin site.
     """
     models = Student
-    list_display = ("enrollment_id", "class_roll_id", "name", "phone_number", "email")
+    list_display = ("enrollment_id", "class_section", "name", "phone_number", "email")

@@ -73,7 +73,10 @@ class Student(models.Model):
     image = models.ImageField(
         _("image"), upload_to=student_image_path, default="default.png"
     )
-    guardians = models.ManyToManyField(Guardian, related_name="wards")
+    guardians = models.ManyToManyField(Guardian, related_name="wards", blank=True)
+    class_section = models.ForeignKey(
+        "academics.Class", null=True, default=None, on_delete=models.SET_NULL
+    )
     
     def __str__(self) -> str:
         return f"{self.enrollment_id} - {self.name}"
