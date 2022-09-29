@@ -34,6 +34,7 @@ class Class(models.Model):
                 fields=["classname", "section"], name="class_unique_constraint"
             )
         ]
+        verbose_name_plural = "classes"
     
     def __str__(self) -> str:
         return f"{self.classname} {self.section}"
