@@ -15,6 +15,7 @@ class GenderChoices(models.TextChoices):
     """
     Contains the available choices for the `gender` field.
     """
+
     MALE = "MALE", "Male"
     FEMALE = "FEMALE", "Female"
     OTHER = "OTHER", "Other"

@@ -14,22 +14,22 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         (
-            "Personal info", 
+            "Personal info",
             {
                 "fields": (
                     "name",
                     "email",
                     "gender",
-                    "phone_number", 
-                    "address", 
-                    "city", 
-                    "nationality", 
-                    "social_category", 
-                    "designation", 
-                    "annual_income", 
+                    "phone_number",
+                    "address",
+                    "city",
+                    "nationality",
+                    "social_category",
+                    "designation",
+                    "annual_income",
                     "image",
                 )
-            }
+            },
         ),
         (
             "Permissions",

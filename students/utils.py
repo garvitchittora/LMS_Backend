@@ -28,6 +28,7 @@ class GuardianStudentRelations(models.TextChoices):
     Provides choices for the relationship of a student with a guardian.
     The guardian can be the student's father, mother, or any other relative.
     """
+
     FATHER = "FATHER", "Father"
     MOTHER = "MOTHER", "Mother"
     RELATIVE = "RELATIVE", "Relative"

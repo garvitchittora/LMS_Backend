@@ -30,7 +30,7 @@ class CommonFilter(FilterSet):
             "nationality": ["iexact", "icontains"],
             "social_category": ["iexact"],
             "designation": ["iexact", "icontains"],
-            "annual_income": ["exact", "gt", "gte", "lt", "lte"]
+            "annual_income": ["exact", "gt", "gte", "lt", "lte"],
         }
 
 
@@ -38,9 +38,5 @@ class UserFilter(CommonFilter):
     class Meta(CommonFilter.Meta):
         model = User
         CommonFilter.Meta.fields.update(
-            {
-                "is_admin": ["exact"],
-                "is_teacher": ["exact"],
-                "is_accountant": ["exact"]
-            }
+            {"is_admin": ["exact"], "is_teacher": ["exact"], "is_accountant": ["exact"]}
         )

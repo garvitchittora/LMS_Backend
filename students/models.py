@@ -3,20 +3,24 @@ from django.utils.translation import gettext_lazy as _
 from PIL import Image
 from users.utils import GenderChoices
 
-from students.utils import (GuardianStudentRelations, guardian_image_path,
-                            student_image_path)
+from students.utils import (
+    GuardianStudentRelations,
+    guardian_image_path,
+    student_image_path,
+)
 
 
 class Guardian(models.Model):
     """
     Stores information of the guardian/parent of a student.
     """
+
     name = models.CharField(_("name"), max_length=300, blank=True)
     relation = models.CharField(
         _("relation"),
         max_length=20,
         default=GuardianStudentRelations.RELATIVE,
-        choices=GuardianStudentRelations.choices
+        choices=GuardianStudentRelations.choices,
     )
     age = models.PositiveSmallIntegerField(_("age"), default=0)
     gender = models.CharField(
@@ -38,7 +42,7 @@ class Guardian(models.Model):
 
     def __str__(self) -> str:
         return f"{self.id}. {self.name}"
-    
+
     def save(self, *args, **kwargs) -> None:
         """
         Save the instance in the database.
@@ -55,6 +59,7 @@ class Student(models.Model):
     """
     All non-academic information of a student.
     """
+
     enrollment_id = models.PositiveBigIntegerField(_("enrollment number"), unique=True)
     class_roll_id = models.PositiveIntegerField(_("class roll number"))
     name = models.CharField(_("name"), max_length=300)
@@ -77,10 +82,10 @@ class Student(models.Model):
     class_section = models.ForeignKey(
         "academics.Class", null=True, default=None, on_delete=models.SET_NULL
     )
-    
+
     def __str__(self) -> str:
         return f"{self.enrollment_id} - {self.name}"
-    
+
     def save(self, *args, **kwargs) -> None:
         """
         Save the instance in the database.
