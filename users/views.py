@@ -1,5 +1,9 @@
 from django.contrib.auth import get_user_model
-from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.generics import (
+    CreateAPIView,
+    ListAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 
 from users.filters import SEARCH_FIELDS, UserFilter
 from users.serializers import UserSerializer
@@ -20,3 +24,10 @@ class UserListView(ListAPIView):
     queryset = User.objects.all()
     filterset_class = UserFilter
     search_fields = SEARCH_FIELDS
+
+
+class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    """Get, update and delete information of an existing user"""
+
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

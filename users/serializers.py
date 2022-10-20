@@ -9,32 +9,45 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = [
-            "last_login", "is_superuser", "is_staff", "groups", "user_permissions"
+            "last_login",
+            "is_superuser",
+            "is_staff",
+            "groups",
+            "user_permissions",
         ]
-        extra_kwargs = {"password": {"write_only": True}}
-    
+        extra_kwargs = {
+            "password": {"write_only": True},
+            "is_admin": {"required": False},
+            "is_teacher": {"required": False},
+            "is_accountant": {"required": False},
+        }
+
     def validate(self, attrs: dict):
-        """ 
+        """
         Check the request data for invalid values and raise `ValidationError` if found.
         """
         # validate password
-        validate_password(attrs["password"])
+        if "password" in attrs:
+            validate_password(attrs["password"])
 
-        # The user must be of atleast one type
-        if not (
-            attrs.get("is_admin") 
-            or attrs.get("is_teacher") 
-            or attrs.get("is_accountant")
+        # all user types must not be false
+        if (
+            not attrs.get(
+                "is_admin", self.instance.is_admin if self.instance else False
+            )
+            and not attrs.get(
+                "is_teacher", self.instance.is_teacher if self.instance else False
+            )
+            and not attrs.get(
+                "is_accountant", self.instance.is_accountant if self.instance else False
+            )
         ):
             raise serializers.ValidationError(
-                detail={
-                    "msg": "is_admin, is_teacher and is_accountant cannot all be false"
-                },
-                code=400
+                detail={"msg": "At least one user type must be true"}, code=400
             )
-        
+
         return super().validate(attrs)
-    
+
     def create(self, validated_data: dict):
         instance = super().create(validated_data)
         instance.set_password(validated_data["password"])
