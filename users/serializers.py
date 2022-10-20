@@ -15,12 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             "groups",
             "user_permissions",
         ]
-        extra_kwargs = {
-            "password": {"write_only": True},
-            "is_admin": {"required": False},
-            "is_teacher": {"required": False},
-            "is_accountant": {"required": False},
-        }
+        extra_kwargs = {"password": {"write_only": True}}
 
     def validate(self, attrs: dict):
         """
