@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework.generics import CreateAPIView, ListAPIView
 
+from users.filters import UserFilter
 from users.serializers import UserSerializer
-from users.utils import FILTER_FIELDS
 
 User = get_user_model()
 
@@ -18,3 +18,4 @@ class UserListView(ListAPIView):
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    filterset_class = UserFilter

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "django_filters",
     "users.apps.UsersConfig",
     "students.apps.StudentsConfig",
     "academics.apps.AcademicsConfig",
@@ -132,3 +133,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Authentication Model
 AUTH_USER_MODEL = "users.User"
+
+# django-rest-framework
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"]
+}
