@@ -4,6 +4,19 @@ from django_filters import FilterSet
 User = get_user_model()
 
 
+SEARCH_FIELDS = [
+    "name",
+    "email",
+    "gender",
+    "phone_number",
+    "address",
+    "city",
+    "nationality",
+    "social_category",
+    "designation",
+]
+
+
 class CommonFilter(FilterSet):
     class Meta:
         abstract = True
