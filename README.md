@@ -15,6 +15,7 @@ Follow the following steps to setup the project on your local system:
 2. Create a python virtual environment - `$ python -m venv lmsenv`
 3. Activate the virtual environment - `$ source lmsenv/bin/activate`
 4. Install required packages - `$ pip install -r requirements.txt`
-5. Done!
+5. Run migrations - `$ python manage.py migrate`
+6. Done!
 
 *Check Wiki for details regarding API and database schema*
