@@ -11,12 +11,17 @@ class User(AbstractUser):
     A core class defining the usable User model derived from AbstractUser.
     It is referred by the `settings.AUTH_USER_MODEL` attribute of the project.
     """
+    # Remove first_name and last_name
+    first_name = None
+    last_name = None
+
     # User types
     is_admin = models.BooleanField(_("admin"), default=False)
     is_teacher = models.BooleanField(_("teacher"), default=False)
     is_accountant = models.BooleanField(_("accountant"), default=False)
 
     # General details
+    name = models.CharField(_("name"), blank=True, max_length=50)
     gender = models.CharField(
         _("gender"),
         choices=GenderChoices.choices,

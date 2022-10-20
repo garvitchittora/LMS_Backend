@@ -5,19 +5,20 @@ from users.forms import UserCreationForm
 from users.models import User
 
 
+@admin.register(User)
 class UserAdmin(BaseUserAdmin):
     model = User
     add_form = UserCreationForm
+    list_display = ("username", "email", "name")
+    search_fields = ("username", "name", "email")
     fieldsets = (
-        *BaseUserAdmin.fieldsets,
+        (None, {"fields": ("username", "password")}),
         (
-            "Roles",
-            {"fields": ("is_admin", "is_teacher", "is_accountant")},
-        ),
-        (
-            "General Details",
+            "Personal info", 
             {
                 "fields": (
+                    "name",
+                    "email",
                     "gender",
                     "phone_number", 
                     "address", 
@@ -28,8 +29,23 @@ class UserAdmin(BaseUserAdmin):
                     "annual_income", 
                     "image",
                 )
+            }
+        ),
+        (
+            "Permissions",
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                ),
             },
-        )
+        ),
+        ("Important dates", {"fields": ("last_login", "date_joined")}),
+        (
+            "Roles",
+            {"fields": ("is_admin", "is_teacher", "is_accountant")},
+        ),
     )
-
-admin.site.register(User, UserAdmin)
