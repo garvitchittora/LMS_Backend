@@ -16,7 +16,7 @@ User = get_user_model()
 class UserCreateView(CreateAPIView):
     """Concrete view to create a new User instance"""
 
-    permission_classes = [IsAdmin | IsAdminUser]
+    permission_classes = [IsAuthenticated, IsAdmin | IsAdminUser]
     serializer_class = UserSerializer
 
 
