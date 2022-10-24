@@ -153,6 +153,4 @@ SIMPLE_JWT = {
     # Keep access token lifetime lower (5-10 minutes) in production
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=12),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
-    "ROTATE_REFRESH_TOKENS": True,
-    "BLACKLIST_AFTER_ROTATION": True,
 }
