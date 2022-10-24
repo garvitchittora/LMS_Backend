@@ -5,10 +5,14 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.permissions import IsAuthenticated
-from users.permissions import IsAdmin
+from users.permissions import IsAdmin, IsTeacher
 
-from academics.models import AcademicSession, Class
-from academics.serializers import AcademicSessionSerializer, ClassSerializer
+from academics.models import AcademicSession, Class, Examination
+from academics.serializers import (
+    AcademicSessionSerializer,
+    ClassSerializer,
+    ExamSerializer,
+)
 
 
 class ClassListCreateView(ListCreateAPIView):
@@ -64,3 +68,26 @@ class AcadSessionReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsAdmin]
     serializer_class = AcademicSessionSerializer
     queryset = AcademicSession.objects.all()
+
+
+class ExamCreateListView(ListCreateAPIView):
+    """
+    GET: List all exams.
+    POST: Create a new exam.
+    """
+
+    permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
+    serializer_class = ExamSerializer
+    queryset = Examination.objects.all()
+
+
+class ExamReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+    """
+    GET: Read a single examination instance.
+    PUT/PATCH: Update exam information.
+    DELETE: Delete exam instance.
+    """
+
+    permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
+    serializer_class = ExamSerializer
+    queryset = Examination.objects.all()
