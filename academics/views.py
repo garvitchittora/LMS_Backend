@@ -1,9 +1,4 @@
-from rest_framework.generics import (
-    CreateAPIView,
-    ListAPIView,
-    ListCreateAPIView,
-    RetrieveUpdateDestroyAPIView,
-)
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsAdmin, IsTeacher
 
@@ -23,9 +18,15 @@ class ClassListCreateView(ListCreateAPIView):
     POST: Create a new class.
     """
 
-    permission_classes = [IsAuthenticated, IsAdmin]
+    permission_classes = [IsAuthenticated]
     serializer_class = ClassSerializer
     queryset = Class.objects.all()
+
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        if self.request.method != "GET":
+            permissions.append(IsAdmin())
+        return permissions
 
 
 class ClassReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -35,29 +36,32 @@ class ClassReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     DELETE: Delete class instance.
     """
 
-    permission_classes = [IsAuthenticated, IsAdmin]
+    permission_classes = [IsAuthenticated]
     serializer_class = ClassSerializer
     queryset = Class.objects.all()
 
-
-class AcadSessionCreateView(CreateAPIView):
-    """
-    POST: Create a new session.
-    """
-
-    permission_classes = [IsAuthenticated, IsAdmin]
-    serializer_class = AcademicSessionSerializer
-    queryset = AcademicSession.objects.all()
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        if self.request.method != "GET":
+            permissions.append(IsAdmin())
+        return permissions
 
 
-class AcadSessionListView(ListAPIView):
+class AcadSessionCreateListView(ListCreateAPIView):
     """
     GET: List all academic sessions
+    POST: Create a new session.
     """
 
     permission_classes = [IsAuthenticated]
     serializer_class = AcademicSessionSerializer
     queryset = AcademicSession.objects.all()
+
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        if self.request.method != "GET":
+            permissions.append(IsAdmin())
+        return permissions
 
 
 class AcadSessionReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -67,9 +71,15 @@ class AcadSessionReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     DELETE: Delete session instance.
     """
 
-    permission_classes = [IsAuthenticated, IsAdmin]
+    permission_classes = [IsAuthenticated]
     serializer_class = AcademicSessionSerializer
     queryset = AcademicSession.objects.all()
+
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        if self.request.method != "GET":
+            permissions.append(IsAdmin())
+        return permissions
 
 
 class ExamCreateListView(ListCreateAPIView):
