@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from academics.models import AcademicSession, Class, Examination, Score
+from academics.models import AcademicSession, Class, Examination, Score, Subject
 
 
 class ClassSerializer(serializers.ModelSerializer):
@@ -24,4 +24,10 @@ class ExamSerializer(serializers.ModelSerializer):
 class ScoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Score
+        fields = "__all__"
+
+
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
         fields = "__all__"

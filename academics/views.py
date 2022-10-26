@@ -7,12 +7,13 @@ from rest_framework.generics import (
 from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsAdmin, IsTeacher
 
-from academics.models import AcademicSession, Class, Examination, Score
+from academics.models import AcademicSession, Class, Examination, Score, Subject
 from academics.serializers import (
     AcademicSessionSerializer,
     ClassSerializer,
     ExamSerializer,
     ScoreSerializer,
+    SubjectSerializer,
 )
 
 
@@ -115,3 +116,26 @@ class ScoreReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
     serializer_class = ScoreSerializer
     queryset = Score.objects.all()
+
+
+class SubjectCreateListView(ListCreateAPIView):
+    """
+    GET: List all subjects.
+    POST: Add a new subject.
+    """
+
+    permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
+    serializer_class = SubjectSerializer
+    queryset = Subject.objects.all()
+
+
+class SubjectReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+    """
+    GET: Read a single subject instance.
+    PUT/PATCH: Update subject information.
+    DELETE: Delete subject instance.
+    """
+
+    permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
+    serializer_class = SubjectSerializer
+    queryset = Subject.objects.all()

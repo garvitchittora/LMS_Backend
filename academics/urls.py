@@ -12,4 +12,6 @@ urlpatterns = [
     path("exam/<int:pk>", views.ExamReadUpdateDeleteView.as_view()),
     path("score", views.ScoreCreateListView.as_view()),
     path("score/<int:pk>", views.ScoreReadUpdateDeleteView.as_view()),
+    path("subject", views.SubjectCreateListView.as_view()),
+    path("subject/<int:pk>", views.SubjectReadUpdateDeleteView.as_view()),
 ]
