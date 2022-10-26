@@ -10,4 +10,6 @@ urlpatterns = [
     path("session/<int:pk>", views.AcadSessionReadUpdateDeleteView.as_view()),
     path("exam", views.ExamCreateListView.as_view()),
     path("exam/<int:pk>", views.ExamReadUpdateDeleteView.as_view()),
+    path("score", views.ScoreCreateListView.as_view()),
+    path("score/<int:pk>", views.ScoreReadUpdateDeleteView.as_view()),
 ]
