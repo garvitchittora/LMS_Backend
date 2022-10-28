@@ -2,6 +2,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsAdmin, IsTeacher
 
+from academics.filters import SubjectFilter
 from academics.models import AcademicSession, Class, Examination, Score, Subject
 from academics.serializers import (
     AcademicSessionSerializer,
@@ -137,6 +138,7 @@ class SubjectCreateListView(ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
     serializer_class = SubjectSerializer
     queryset = Subject.objects.all()
+    filterset_class = SubjectFilter
 
 
 class SubjectReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
