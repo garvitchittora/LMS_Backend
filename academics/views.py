@@ -2,7 +2,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsAdmin, IsTeacher
 
-from academics.filters import SubjectFilter
+from academics.filters import ExamFilter, ScoreFilter, SubjectFilter
 from academics.models import AcademicSession, Class, Examination, Score, Subject
 from academics.serializers import (
     AcademicSessionSerializer,
@@ -92,6 +92,7 @@ class ExamCreateListView(ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
     serializer_class = ExamSerializer
     queryset = Examination.objects.all()
+    filterset_class = ExamFilter
 
 
 class ExamReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -115,6 +116,7 @@ class ScoreCreateListView(ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
     serializer_class = ScoreSerializer
     queryset = Score.objects.all()
+    filterset_class = ScoreFilter
 
 
 class ScoreReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
