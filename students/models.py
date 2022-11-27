@@ -63,7 +63,7 @@ class Student(models.Model):
     enrollment_id = models.PositiveBigIntegerField(_("enrollment number"), unique=True)
     # class_roll_id = models.PositiveIntegerField(_("class roll number"))
     name = models.CharField(_("name"), max_length=300)
-    age = models.PositiveSmallIntegerField(_("age"), default=0)
+    dob = models.DateField(_("date of birth"), blank=True, null=True)
     gender = models.CharField(
         _("gender"),
         choices=GenderChoices.choices,
