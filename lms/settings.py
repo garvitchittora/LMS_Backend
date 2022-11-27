@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-^ow(wjp(d*13u9cvd=1ih)0+q7h@#+nl^yb60x$14g9-s3==z*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -42,12 +42,14 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "django_filters",
+    "corsheaders",
     "users.apps.UsersConfig",
     "students.apps.StudentsConfig",
     "academics.apps.AcademicsConfig",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -154,3 +156,6 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=12),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
 }
+
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True
