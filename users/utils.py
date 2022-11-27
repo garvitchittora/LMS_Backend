@@ -1,4 +1,14 @@
 from django.db import models
+from rest_framework_simplejwt.tokens import RefreshToken
+
+
+def get_tokens_for_user(user):
+    """Get refresh-access token pair for the given user instance"""
+    refresh = RefreshToken.for_user(user)
+    return {
+        "refresh": str(refresh),
+        "access": str(refresh.access_token),
+    }
 
 
 def authuser_image_path(instance, filename: str) -> str:
