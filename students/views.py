@@ -1,6 +1,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
+from students.filters import GuardianFilter, StudentFilter
 from students.models import Guardian, Student
 from students.serializers import GuardianSerializer, StudentSerializer
 from users.permissions import IsAdmin, IsTeacher
@@ -15,6 +16,7 @@ class GuardianListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
     serializer_class = GuardianSerializer
     queryset = Guardian.objects.all()
+    filterset_class = GuardianFilter
 
 
 class GuardianReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -38,6 +40,7 @@ class StudentListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAdmin | IsTeacher]
     serializer_class = StudentSerializer
     queryset = Student.objects.all()
+    filterset_class = StudentFilter
 
 
 class StudentReadUpdateDeleteView(RetrieveUpdateDestroyAPIView):
