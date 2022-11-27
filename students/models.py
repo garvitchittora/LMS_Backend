@@ -1,13 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from PIL import Image
-from users.utils import GenderChoices
 
 from students.utils import (
     GuardianStudentRelations,
     guardian_image_path,
     student_image_path,
 )
+from users.utils import GenderChoices
 
 
 class Guardian(models.Model):
@@ -61,7 +61,7 @@ class Student(models.Model):
     """
 
     enrollment_id = models.PositiveBigIntegerField(_("enrollment number"), unique=True)
-    class_roll_id = models.PositiveIntegerField(_("class roll number"))
+    # class_roll_id = models.PositiveIntegerField(_("class roll number"))
     name = models.CharField(_("name"), max_length=300)
     age = models.PositiveSmallIntegerField(_("age"), default=0)
     gender = models.CharField(
@@ -78,7 +78,9 @@ class Student(models.Model):
     image = models.ImageField(
         _("image"), upload_to=student_image_path, default="default.png"
     )
-    guardians = models.ManyToManyField(Guardian, related_name="wards", blank=True)
+    # guardians = models.ManyToManyField(Guardian, related_name="wards", blank=True)
+    father = models.CharField(_("father"), max_length=300, blank=True)
+    mother = models.CharField(_("mother"), max_length=300, blank=True)
     class_section = models.ForeignKey(
         "academics.Class", null=True, default=None, on_delete=models.SET_NULL
     )

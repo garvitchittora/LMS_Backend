@@ -12,10 +12,12 @@ class StudentFilter(AbstractFilter):
             "class_section",
             "class_section__classname",
             "class_section__section",
+            "father",
+            "mother",
         ]
 
 
 class GuardianFilter(AbstractFilter):
     class Meta(AbstractFilter.Meta):
         model = Guardian
-        fields = ["name", "email", "wards__name", "wards__enrollment_id"]
+        fields = ["name", "email"]
