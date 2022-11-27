@@ -31,12 +31,8 @@ class TokenObtainPairView(APIView):
         if user is None:
             msg = {"error": "invalid credentials"}
             return Response(msg, HTTP_401_UNAUTHORIZED)
-        response = {
-            "success": "User Authenticated",
-            "is_admin": user.is_admin,
-            "is_teacher": user.is_teacher,
-            "is_accountant": user.is_accountant,
-        }
+        user_serializer = UserSerializer(user)
+        response = {"user": user_serializer.data}
         response.update(get_tokens_for_user(user))
         return Response(response, HTTP_200_OK)
 
